@@ -1,30 +1,30 @@
 use std::io;
 fn main() {
-    println!("❤  Welcome to calculator , When you'r finished you can exit by typung exit ❤");
+    println!("❤  Welcome to calculator , When you'r finished you can exit by typing exit ❤");
     loop {
         // Read user input
         let mut input = String::new();
-        println!("Enter a calculation");
+        println!("Enter an Expression to be calculated");
 
         io::stdin()
             .read_line(&mut input)
-            .expect("Failed to read line");
+            .expect("Failed to read expression! \nPlease try again");
 
-        //Thrim whitespace and check for exist
+        // Trim whitespace and check for exist
         let input = input.trim();
         if input.eq_ignore_ascii_case("exit") {
             println!("Calculator existed , Bye❤.");
             break;
         }
 
-        //Parse the input
+        // Parse the input
         let parts: Vec<&str> = input.split_whitespace().collect();
         if parts.len() != 3 {
             println!("Invalid input . Please enter in the format: <number> <operator> <number>");
             continue; // start the loop again to get valid input from user
         }
 
-        //extract numbers and operator
+        // extract numbers and operator
         let num1: f64 = match parts[0].parse() {
             Ok(n) => n,
             Err(_) => {
@@ -41,7 +41,7 @@ fn main() {
             }
         };
 
-        //Perform the Operation
+        // Perform the Operation
         let result = match operator {
             "+" => num1 + num2,
             "-" => num1 - num2,
@@ -55,7 +55,7 @@ fn main() {
             }
 
             _ => {
-                println!("Ibvalid operator: {}", operator);
+                println!("Invalid Operator: {}", operator);
                 continue;
             }
         };
